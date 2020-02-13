@@ -3,41 +3,40 @@ import {Link} from 'react-router-dom'
 import './App.css';
 import { List, Avatar} from 'antd';
 import Nav from './Nav'
+import { connect } from 'react-redux';
 
-function ScreenSource() {
+function ScreenSource(props) {
 
   const [sourceList, setSourceList] = useState([])
+  const [selectedLang, setSelectedLang] = useState(props.selectedLang)
 
-  const data = [
-    {
-      title: 'Ant Design Title 1',
-    },
-    {
-      title: 'Ant Design Title 2',
-    },
-    {
-      title: 'Ant Design Title 3',
-    },
-    {
-      title: 'Ant Design Title 4',
-    },
-  ];
 
   useEffect(() => {
     const APIResultsLoading = async() => {
-      const data = await fetch('https://newsapi.org/v2/sources?language=fr&country=fr&apiKey=9de50ca6295d47e0855b01f48e9731fd')
+      var langue = 'fr'
+      var country = 'fr'
+        
+      if(selectedLang == 'en'){
+        var langue = 'en'
+        var country = 'us'
+      }
+      props.changeLang(selectedLang)
+      const data = await fetch(`https://newsapi.org/v2/sources?language=${langue}&country=${country}&apiKey=189771adbd2f40d4a27117edd90ff089`)
       const body = await data.json()
       setSourceList(body.sources)
     }
 
     APIResultsLoading()
-  }, [])
+  }, [selectedLang])
 
   return (
     <div>
         <Nav/>
        
-       <div className="Banner"/>
+       <div style={{display:'flex', justifyContent:'center', alignItems:'center'}} className="Banner">
+          <img style={{width:'40px', margin:'10px',cursor:'pointer'}} src='/images/fr.png' onClick={() => setSelectedLang('fr')} />
+          <img style={{width:'40px', margin:'10px',cursor:'pointer'}} src='/images/uk.png' onClick={() => setSelectedLang('en')} /> 
+        </div>
 
        <div className="HomeThemes">
           
@@ -62,4 +61,19 @@ function ScreenSource() {
   );
 }
 
-export default ScreenSource;
+function mapStateToProps(state){
+  return {selectedLang: state.selectedLang}
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    changeLang: function(selectedLang){
+      dispatch({type: 'changeLang', selectedLang: selectedLang})
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScreenSource)
