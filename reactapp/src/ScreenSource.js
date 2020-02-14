@@ -6,6 +6,7 @@ import Nav from './Nav'
 import {connect} from 'react-redux'
 
 function ScreenSource(props) {
+  console.log("toto")
 
   const [sourceList, setSourceList] = useState([])
   const [selectedLang, setSelectedLang] = useState(props.selectedLang)
