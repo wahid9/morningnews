@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import {Input,Button} from 'antd';
 import {Link, Redirect} from 'react-router-dom'
+import { connect } from 'react-redux';
 
-function ScreenHome() {
+function ScreenHome(props) {
 
   const [signUpUsername, setSignUpUsername] = useState('')
   const [signUpEmail, setSignUpEmail] = useState('')
@@ -29,10 +30,12 @@ function ScreenHome() {
 
     if(body.result == true){
       setUserExists(true)
+      props.addToken(body.token)
     } else {
       setErrorsSignup(body.error)
     }
   }
+
 
   var handleSubmitSignin = async () => {
  
@@ -46,7 +49,8 @@ function ScreenHome() {
 
     if(body.result == true){
       setUserExists(true)
-    }  else {
+      props.addToken(body.token)
+    } else {
       setErrorsSignin(body.error)
     }
   }
@@ -102,4 +106,17 @@ function ScreenHome() {
   );
 }
 
-export default ScreenHome;
+
+
+  function mapDispatchToProps(dispatch){
+    return {
+      addToken: function(token){
+        dispatch({type: 'addToken', token: token})
+      }
+     }
+    }
+    
+    export default connect(
+      null,
+      mapDispatchToProps
+    )(ScreenHome);

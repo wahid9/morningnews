@@ -48,12 +48,16 @@ h4 {
 }
 
 .Banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   height: 80px;
   background-image: url('/images/flat01.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.8;
+  width: 100%;
 }
 
 .Card{

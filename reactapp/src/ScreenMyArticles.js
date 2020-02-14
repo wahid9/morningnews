@@ -32,7 +32,7 @@ function ScreenMyArticles(props) {
   }
 
   var noArticles
-  if(props.myArticles == 0){
+  if(props.myArticles === 0){
     noArticles = <div style={{marginTop:"30px"}}>No Articles</div>
   }
 
@@ -111,8 +111,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return {
     deleteToWishList: function(articleTitle){
-      dispatch({type: 'deleteArticle',
-        title: articleTitle
+      dispatch({type: 'deleteArticle', title: articleTitle
       })
     }
   }
