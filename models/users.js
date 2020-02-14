@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     salt: String,
     password: String,
     token: String,
-    articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'articles'}]
+    // articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'articles'}]
 
 })
 
