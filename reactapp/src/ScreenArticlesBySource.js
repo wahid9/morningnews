@@ -16,7 +16,7 @@ function ScreenArticlesBySource(props) {
 
   useEffect(() => {
     const findArticles = async() => {
-      const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&apiKey=2883e07c86dd475cac2332c62fc8a276`,)
+      const data = await fetch(`https://newsapi.org/v2/top-headlines?sources=${props.match.params.id}&apiKey=189771adbd2f40d4a27117edd90ff089`)
       const body = await data.json()
       console.log(body)
       setArticleList(body.articles) 
@@ -107,7 +107,8 @@ function ScreenArticlesBySource(props) {
 function mapDispatchToProps(dispatch){
   return {
     addToWishList: function(article){
-      dispatch({type: 'addArticle', articleLiked: article
+      dispatch({type: 'addArticle',
+        articleLiked: article
       })
     }
   }

@@ -1,16 +1,14 @@
 import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import './App.css';
-import { List, Avatar, Icon} from 'antd';
+import { List, Avatar} from 'antd';
 import Nav from './Nav'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux';
 
 function ScreenSource(props) {
-  console.log("toto")
 
   const [sourceList, setSourceList] = useState([])
   const [selectedLang, setSelectedLang] = useState(props.selectedLang)
-
 
 
   useEffect(() => {
@@ -26,7 +24,6 @@ function ScreenSource(props) {
       const data = await fetch(`https://newsapi.org/v2/sources?language=${langue}&country=${country}&apiKey=189771adbd2f40d4a27117edd90ff089`)
       const body = await data.json()
       setSourceList(body.sources)
-      console.log(body.sources)
     }
 
     APIResultsLoading()
@@ -58,7 +55,7 @@ function ScreenSource(props) {
                 />
 
 
-        </div>
+          </div>
                  
       </div>
   );

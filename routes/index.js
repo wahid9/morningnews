@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var uid2 = require("uid2");
-var SHA256 = require("crypto-js/sha256");
-var encBase64 = require("crypto-js/enc-base64");
 
 var uid2 = require('uid2')
 var SHA256 = require('crypto-js/sha256')
@@ -10,9 +7,7 @@ var encBase64 = require('crypto-js/enc-base64')
 
 var userModel = require('../models/users')
 
-var userModel = require('../models/users')
 
-// ROUTE SIGN-UP
 router.post('/sign-up', async function(req,res,next){
 
   var error = []
@@ -21,10 +16,7 @@ router.post('/sign-up', async function(req,res,next){
   var token = null
 
   const data = await userModel.findOne({
-    email: req.body.emailFromFront,
-    salt : salt,
-    password: SHA256(req.body.password + salt).toString(encBase64),
-    token: uid2(32)
+    email: req.body.emailFromFront
   })
 
   if(data != null){
@@ -49,8 +41,7 @@ router.post('/sign-up', async function(req,res,next){
       token: uid2(32),
       salt: salt,
     })
-   
-
+  
     saveUser = await newUser.save()
   
     
@@ -59,11 +50,10 @@ router.post('/sign-up', async function(req,res,next){
       token = saveUser.token
     }
   }
+  
 
   res.json({result, saveUser, error, token})
 })
-
-// ROUTE SIGN-IN
 
 router.post('/sign-in', async function(req,res,next){
 
@@ -98,10 +88,8 @@ router.post('/sign-in', async function(req,res,next){
     } else {
       error.push('email incorrect')
     }
-  
   }
   
-  res.json({result, user, error, token})
 
   res.json({result, user, error, token})
 
