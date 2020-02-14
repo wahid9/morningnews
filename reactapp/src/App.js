@@ -7,6 +7,10 @@ import {createStore, combineReducers} from 'redux'
 
 import wishList from './reducers/articles'
 import token from './reducers/token'
+<<<<<<< HEAD
+=======
+import selectedLang from './reducers/selectedLang'
+>>>>>>> bfc69f5f4c350e889b13b7ccfaffd730245d1f2f
 
 import selectedLang from './reducers/selectedLang'
 import ScreenHome from './ScreenHome';

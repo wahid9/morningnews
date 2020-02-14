@@ -15,16 +15,15 @@ function ScreenSource(props) {
 
   useEffect(() => {
     const APIResultsLoading = async() => {
-      var langue ='fr'
-      var country ='fr'
-console.log("jj")
-    if (selectedLang == 'en'){
-      var langue ='en'
-      var country ='us'
-      } 
+      var langue = 'fr'
+      var country = 'fr'
+        
+      if(selectedLang == 'en'){
+        var langue = 'en'
+        var country = 'us'
+      }
       props.changeLang(selectedLang)
-      console.log(`https://newsapi.org/v2/sources?language=${langue}&country=${country}&apiKey=2883e07c86dd475cac2332c62fc8a276`)
-      const data = await fetch(`https://newsapi.org/v2/sources?language=${langue}&country=${country}&apiKey=2883e07c86dd475cac2332c62fc8a276`,)
+      const data = await fetch(`https://newsapi.org/v2/sources?language=${langue}&country=${country}&apiKey=189771adbd2f40d4a27117edd90ff089`)
       const body = await data.json()
       setSourceList(body.sources)
       console.log(body.sources)
@@ -37,13 +36,11 @@ console.log("jj")
     <div>
         <Nav/>
        
-       <div style ={{display:'flex', justifyContent:'center' , alignItems:'center'}} className="Banner">
-          <img style={{width:'40px', margin:'10px', cursor: 'pointer'}} src='/images/fr.jpg'  onClick={() => setSelectedLang('fr')}/>
-          <img style={{width:'40px', margin:'10px', cursor: 'pointer'}} src='/images/en.jpg'  onClick={() => setSelectedLang('en')} />
-    
-       </div> 
-      
-      
+       <div style={{display:'flex', justifyContent:'center', alignItems:'center'}} className="Banner">
+          <img style={{width:'40px', margin:'10px',cursor:'pointer'}} src='/images/fr.png' onClick={() => setSelectedLang('fr')} />
+          <img style={{width:'40px', margin:'10px',cursor:'pointer'}} src='/images/uk.png' onClick={() => setSelectedLang('en')} /> 
+        </div>
+
        <div className="HomeThemes">
           
               <List
@@ -70,14 +67,16 @@ console.log("jj")
 function mapStateToProps(state){
   return {selectedLang: state.selectedLang}
 }
+
 function mapDispatchToProps(dispatch){
   return {
-    changeLang: function (selectedLang){
+    changeLang: function(selectedLang){
       dispatch({type: 'changeLang', selectedLang: selectedLang})
     }
   }
 }
-export default connect (
+
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-  )(ScreenSource);
+)(ScreenSource)

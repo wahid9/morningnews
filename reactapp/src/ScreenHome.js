@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import './App.css';
 import {Input,Button} from 'antd';
 import {Link, Redirect} from 'react-router-dom'
+<<<<<<< HEAD
 import { connect } from 'react-redux';
+=======
+import {connect} from 'react-redux'
+>>>>>>> bfc69f5f4c350e889b13b7ccfaffd730245d1f2f
 
 function ScreenHome(props) {
 
@@ -29,8 +33,13 @@ function ScreenHome(props) {
     const body = await data.json()
 
     if(body.result == true){
-      setUserExists(true)
       props.addToken(body.token)
+      setUserExists(true)
+<<<<<<< HEAD
+      props.addToken(body.token)
+=======
+      
+>>>>>>> bfc69f5f4c350e889b13b7ccfaffd730245d1f2f
     } else {
       setErrorsSignup(body.error)
     }
@@ -48,9 +57,15 @@ function ScreenHome(props) {
     const body = await data.json()
 
     if(body.result == true){
+      props.addToken(body.token)
       setUserExists(true)
+<<<<<<< HEAD
       props.addToken(body.token)
     } else {
+=======
+      
+    }  else {
+>>>>>>> bfc69f5f4c350e889b13b7ccfaffd730245d1f2f
       setErrorsSignin(body.error)
     }
   }
@@ -106,6 +121,7 @@ function ScreenHome(props) {
   );
 }
 
+<<<<<<< HEAD
 
 
   function mapDispatchToProps(dispatch){
@@ -120,3 +136,17 @@ function ScreenHome(props) {
       null,
       mapDispatchToProps
     )(ScreenHome);
+=======
+function mapDispatchToProps(dispatch){
+  return {
+    addToken: function(token){
+      dispatch({type: 'addToken', token: token})
+    }
+  }
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ScreenHome)
+>>>>>>> bfc69f5f4c350e889b13b7ccfaffd730245d1f2f
